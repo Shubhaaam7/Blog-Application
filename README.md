@@ -3,6 +3,7 @@ This repo represents blog applications including creating new blog posts, updati
 blog application created using .NET CORE MVC & SQL SERVER.
 
 Note - For the Database, you can refer to script.sql added into repo.
+
 ScreenShots-
 
 1) Blog Post Home Page
