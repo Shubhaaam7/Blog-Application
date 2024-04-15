@@ -1,0 +1,42 @@
+﻿@model BlogApplication.Models.Blog
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<h1>Edit Blog</h1>
+
+<form asp-controller="Blogs" method="post" class="form-horizontal" role="form">
+    <div class="mt-3">
+        <label class="form-label">Blog Title</label>
+        <input type="text" class="form-control" asp-for="Title" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">Auther Name</label>
+        <input type="text" class="form-control" asp-for="AutherName" />
+    </div>
+
+    <div class="mt-3">
+        <label class="form-label">publication Date</label>
+        <input type="date" class="form-control" asp-for="PublicationDate" />
+    </div>
+
+
+
+    <!-- body input -->
+
+    <div class="form-outline mb-4">
+        <label class="form-label" asp-for="Contents"></label>
+        <div>
+            <textarea asp-for="Contents" class="form-control" id="summernote"></textarea>
+            <span asp-validation-for="Contents" class="text-danger"></span>
+        </div>
+    </div>
+
+
+    <div class="mt-3">
+        <button type="submit" class="btn btn-primary" asp-controller="Blogs">Update</button>
+    </div>
+
+
+
+</form>
