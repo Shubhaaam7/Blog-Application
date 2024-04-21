@@ -15,7 +15,15 @@
             <div class="card"> 
                 <p class="card-title">@item.Title</p>
                 <p class="small-desc">
-                  @item.Contents.Substring(0,100)
+                    @if (@item.Contents.Length<100)
+                    {
+                        @item.Contents
+                    }
+                    else
+                    {
+                        @item.Contents.Substring(0, 100)
+                    }
+                   
                 </p>
                 <P> Published Date:@item.PublicationDate         Auther Name:@item.AutherName
                 </P>
