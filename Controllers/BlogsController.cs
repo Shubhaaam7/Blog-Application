@@ -43,6 +43,7 @@ namespace BlogApplication.Controllers
             return View(List);
         }
         [HttpGet]
+        [Route("Blogs/Edit/{blogId:int}")]
         public IActionResult Edit(int blogId)
         {
             Blog modelData = new Blog();

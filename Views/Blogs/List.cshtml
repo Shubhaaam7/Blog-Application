@@ -7,6 +7,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
+<form asp-controller="Blogs" role="form" asp-action="post" >
 <tbody>
     @foreach (var item in Model)
     {
@@ -23,7 +24,7 @@
                     {
                         @item.Contents.Substring(0, 100)
                     }
-                   
+                    
                 </p>
                 <P> Published Date:@item.PublicationDate         Auther Name:@item.AutherName
                 </P>
@@ -46,3 +47,4 @@
     }
 
 </tbody>
+</form>
