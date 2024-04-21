@@ -35,5 +35,9 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Blogs}/{action=List}/{id?}");
-
+app.MapAreaControllerRoute(
+    name: "Edit",
+    areaName: "Blogs",
+    pattern: "{controller=Blogs}/{action=Edit}/{id?}"
+    );
 app.Run();
