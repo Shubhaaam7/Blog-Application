@@ -5,6 +5,7 @@ using BlogApplication.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Serilog;
 using System;
 using System.Data;
 using System.Text;
@@ -13,6 +14,7 @@ namespace BlogApplication.BlogService_Implemetation
     public class BlogServiceImplementation : IBlog
     {
         private readonly ApplicationDbContext context;
+       
         public BlogServiceImplementation(ApplicationDbContext _context)
         {
             context = _context;
@@ -50,11 +52,14 @@ namespace BlogApplication.BlogService_Implemetation
                 }
                 else 
                 {
+                    Log.Information("Controller:BlogServiceImplementation  Method:BlogList" +"List Fetched Successfully");
+                
                     return outputList;
                 }    
             }
             catch (Exception ex) 
             {
+                Log.Error("Controller:BlogServiceImplementation  Method:BlogList"+ ex);
                 throw ex;
             }
         }
@@ -81,10 +86,13 @@ namespace BlogApplication.BlogService_Implemetation
                 context.BlogDetails.Add(blog);
                 context.SaveChanges();
                 output = BlogConstant.SUCCESSMESSAGE;
+
+                Log.Information("Controller:BlogServiceImplementation  Method:Create" + "Blog created Successfully");
                 return output;
             }
             catch(Exception ex)
             {
+                Log.Error("Controller:BlogServiceImplementation  Method:Create" + ex);
                 throw ex;
             }   
         }
@@ -109,6 +117,7 @@ namespace BlogApplication.BlogService_Implemetation
                 Model.Contents = BlogData.Contents;
                 Model.PublicationDate=BlogData.PublicationDate; 
             }
+           
             return Model;
         }
 
@@ -133,12 +142,15 @@ namespace BlogApplication.BlogService_Implemetation
                     blog.UpdatedDate = DateTime.Now;
                     context.BlogDetails.Update(blog); 
                     context.SaveChanges();
+
+                    Log.Information("Controller:BlogServiceImplementation  Method:Edit" + "Blog updated successfully");
                     output = BlogConstant.SUCCESSMESSAGE;
                 }
                 return output;
             }
             catch(Exception ex) 
             {
+                Log.Error("Controller:BlogServiceImplementation  Method:Edit" + ex);
                 throw ex;           
             }   
         }
