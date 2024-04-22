@@ -1,12 +1,16 @@
 using BlogApplication.BlogService_Implemetation;
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
+
 using Microsoft.EntityFrameworkCore;
+using Serilog;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+
 
 builder.Services.AddScoped<IBlog,BlogServiceImplementation>();// Added Dependency Injection
 
@@ -24,6 +28,15 @@ if (!app.Environment.IsDevelopment())
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+//Logger
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("Logs/BlogApplicationLoggs.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+    
+
 
 app.UseHttpsRedirection();
 app.UseStaticFiles();
