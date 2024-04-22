@@ -30,8 +30,13 @@ namespace BlogApplication.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult Home()
+        {
+            return View();
+        }
 
-        
+
 
         [HttpPost]
         public async Task <IActionResult> Create(Blog BlogModel)
