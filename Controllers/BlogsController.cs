@@ -41,8 +41,16 @@ namespace BlogApplication.Controllers
         [HttpPost]
         public async Task <IActionResult> Create(Blog BlogModel)
         {
-            var status= _blogService.CreateBlog(BlogModel);
-            return RedirectToAction(BlogConstant.LIST);
+            if(ModelState.IsValid)
+            {
+                var status = _blogService.CreateBlog(BlogModel);
+                return RedirectToAction(BlogConstant.LIST);
+            }
+            else
+            {
+                return RedirectToAction(BlogConstant.Create);
+            }
+            
         }
         [HttpGet]
         public IActionResult List()
@@ -70,12 +78,17 @@ namespace BlogApplication.Controllers
         [HttpPost]
         public IActionResult Edit(Blog Model)
         {
-            var Status= _blogService.Edit(Model);
-            if( Status == BlogConstant.SUCCESSMESSAGE)
+
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(BlogConstant.LIST);
+                var Status = _blogService.Edit(Model);
+                if (Status == BlogConstant.SUCCESSMESSAGE)
+                {
+                    return RedirectToAction(BlogConstant.LIST);
+                }
+
             }
-            return RedirectToAction(BlogConstant.LIST);
+            return RedirectToAction(BlogConstant.Edit,Model.Id);
         }
 
         public IActionResult Delete(int Id)

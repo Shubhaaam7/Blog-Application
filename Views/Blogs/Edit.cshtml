@@ -1,4 +1,8 @@
 ﻿@model BlogApplication.Models.Blog
+@{
+   
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
@@ -9,17 +13,22 @@
 
     <div class="mt-3">
         <label class="form-label">Blog Title</label>
-        <input type="text" class="form-control" asp-for="Title" />
+        <input type="text" class="form-control" asp-for="Title"/>
+        <span asp-validation-for="Title" class="text-danger"></span>
     </div>
 
     <div class="mt-3">
         <label class="form-label">Auther Name</label>
-        <input type="text" class="form-control" asp-for="AutherName" />
+        <input type="text" class="form-control" asp-for="AutherName" required />
+        <span asp-validation-for="AutherName" class="text-danger"></span>
+
     </div>
 
     <div class="mt-3">
         <label class="form-label">Publication Date</label>
         <input type="date" class="form-control" asp-for="PublicationDate" />
+        <span asp-validation-for="PublicationDate" class="text-danger"></span>
+
     </div>
 
 
@@ -29,14 +38,14 @@
     <div class="form-outline mb-4">
         <label class="form-label" asp-for="Contents"></label>
         <div>
-            <textarea asp-for="Contents" class="form-control" id="summernote"></textarea>
+            <textarea asp-for="Contents" class="form-control" id="summernote" required></textarea>
             <span asp-validation-for="Contents" class="text-danger"></span>
         </div>
     </div>
 
 
     <div class="mt-3">
-        <button type="submit" class="btn btn-primary" asp-controller="Blogs">Update</button>
+        <button type="submit" class="custom-btn btn-2" asp-controller="Blogs">Update</button>
     </div>
 
 

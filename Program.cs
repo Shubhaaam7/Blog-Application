@@ -31,8 +31,7 @@ if (!app.Environment.IsDevelopment())
 
 //Logger
 Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Information()
-    .WriteTo.Console()
+    .MinimumLevel.Error()
     .WriteTo.File("Logs/BlogApplicationLoggs.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
     

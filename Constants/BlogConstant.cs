@@ -10,6 +10,10 @@
         /// SUCCESSMESSAGE
         /// </summary>
         public static string SUCCESSMESSAGE = "Data updated Successfully";
+
+        public static string Create = "Create";
+
+        public static string Edit = "Edit";
     }
 }
 
