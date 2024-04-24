@@ -61,6 +61,7 @@ namespace BlogApplication.BlogService_Implemetation
             {
                 Log.Error("Controller:BlogServiceImplementation  Method:BlogList"+ ex);
                 throw ex;
+
             }
         }
         #endregion

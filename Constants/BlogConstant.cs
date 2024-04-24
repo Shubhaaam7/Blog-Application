@@ -10,6 +10,14 @@
         /// SUCCESSMESSAGE
         /// </summary>
         public static string SUCCESSMESSAGE = "Data updated Successfully";
+<<<<<<< Updated upstream
+=======
+
+        public static string Create = "Create";
+
+        public static string Edit = "Edit";
+
+>>>>>>> Stashed changes
     }
 }
 
