@@ -13,8 +13,11 @@ namespace BlogApplication.Controllers
     {
         // Created Reference of ApplicationDbContext class
         private readonly ApplicationDbContext context; 
+
         //Created Reference of Iblog service  Interface
         private readonly IBlog _blogService;
+
+        //Created Reference of Toaster service  Interface
         private readonly INotyfService _toastr;
 
 
