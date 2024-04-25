@@ -1,4 +1,5 @@
 ﻿
+using AspNetCoreHero.ToastNotification.Abstractions;
 using BlogApplication.Constants;
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
@@ -13,12 +14,18 @@ namespace BlogApplication.Controllers
         // Created Reference of ApplicationDbContext class
         private readonly ApplicationDbContext context; 
         //Created Reference of Iblog service  Interface
-        private readonly IBlog _blogService; 
+        private readonly IBlog _blogService;
+        private readonly INotyfService _toastr;
 
-        public BlogsController(ApplicationDbContext _context, IBlog blogService)
+
+        public BlogsController(ApplicationDbContext _context, 
+                                IBlog blogService,
+                                INotyfService toastr
+            )
         {
             context = _context;
             _blogService = blogService;
+            _toastr = toastr;
         }
         public IActionResult Index()
         {
@@ -41,11 +48,14 @@ namespace BlogApplication.Controllers
         public async Task <IActionResult> Create(Blog BlogModel)
         {
             var status= _blogService.CreateBlog(BlogModel);
+
+           
             return RedirectToAction(BlogConstant.LIST);
         }
         [HttpGet]
         public IActionResult List()
         {
+           
             var List = _blogService.BlogList();
             return View(List);
         }
@@ -72,6 +82,7 @@ namespace BlogApplication.Controllers
             var Status= _blogService.Edit(Model);
             if( Status == BlogConstant.SUCCESSMESSAGE)
             {
+                _toastr.Success(BlogConstant.SUCCESSMESSAGE);
                 return RedirectToAction(BlogConstant.LIST);
             }
             return RedirectToAction(BlogConstant.LIST);

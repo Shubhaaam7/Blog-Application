@@ -1,3 +1,4 @@
+using AspNetCoreHero.ToastNotification;
 using BlogApplication.BlogService_Implemetation;
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
@@ -10,14 +11,19 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
-
-
 builder.Services.AddScoped<IBlog,BlogServiceImplementation>();// Added Dependency Injection
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("Blogs")));  //Injecting database connectionvity
 
 
+//Added for toaster notification
+builder.Services.AddNotyf(config =>
+{
+    config.DurationInSeconds = 10;
+    config.IsDismissable = true;
+    config.Position = NotyfPosition.TopRight;
+});
 
 var app = builder.Build();
 
@@ -32,10 +38,10 @@ if (!app.Environment.IsDevelopment())
 //Logger
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
-    .WriteTo.Console()
+    .MinimumLevel.Error()
     .WriteTo.File("Logs/BlogApplicationLoggs.txt", rollingInterval: RollingInterval.Day)
     .CreateLogger();
-    
+
 
 
 app.UseHttpsRedirection();
