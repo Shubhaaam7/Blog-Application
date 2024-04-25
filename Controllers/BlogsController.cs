@@ -44,7 +44,6 @@ namespace BlogApplication.Controllers
         }
 
 
-
         [HttpPost]
         public async Task <IActionResult> Create(Blog BlogModel)
         {
