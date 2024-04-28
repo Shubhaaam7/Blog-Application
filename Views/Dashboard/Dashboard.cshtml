@@ -1,0 +1,116 @@
+﻿
+@* <canvas id="myChart"></canvas> *@
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+
+<style>
+    
+
+
+    body {
+        background-image: url()!important;
+        
+  
+    }
+</style>
+<form asp-controller="Dashboard"  class="form-horizontal" role="form">
+    <div class="mt-3">
+        <p>
+            <div class="row">
+                <div class="col-1">
+                    <label>Chart-Type</label>
+                </div>
+                <div class="col-2">
+                    <select id="ChartType" class="form-control" style="width:150px;">
+                        <option selected>-Select Chart Type-</option>
+                        <option>bar</option>
+                        <option>line</option>
+                        <option>pie</option>
+                        <option>doughnut</option>
+                    </select>
+                </div>
+                <div class="col-4">
+                    <input id="Id" value="Show Graph" type="button" />
+                </div>
+            </div>
+        </p>
+        
+        <div id="charView">
+            <canvas id="myChart"></canvas>
+        </div>
+    </div>
+    </form>
+@section Scripts{
+    <script>
+
+
+        $("#Id").click(function () {
+   
+            ChangeGraph();
+
+        });
+        var ChangeGraph = function () 
+        {
+            var GraphType = $("#ChartType").val()
+            var ViewGraph = document.getElementById('charView');
+            ViewGraph.innerHTML = '&nbsp';
+            $('#charView').append('<canvas id="myChart" style="max-width:450px; max-height:"250px"></canvas>');
+
+
+            $.ajax({
+                url: '/Dashboard/List',
+                type: 'get',
+                data: "",
+                success: function (data) {
+                  
+                    var _data = data;
+                    var _chatLabels = _data[0];
+                    var _chatData = _data[1];
+                    var barColor = 
+                    [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(255, 159, 64, 0.2)',
+                            'rgba(255, 205, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(201, 203, 207, 0.2)'
+                     ];
+
+                  
+
+                    new Chart("myChart",
+                        {
+                            type: GraphType,
+                            data:
+                            {
+                                labels: _chatLabels,
+                               
+                                datasets: [{
+                                    backgroundColor: [
+                                        'rgba(255, 99, 132)',
+                                        'rgba(255, 159, 64)',
+                                        'rgba(255, 205, 86)',
+                                        'rgba(75, 192, 192)',
+                                        'rgba(54, 162, 235)',
+                                        'rgba(153, 102, 255)',
+                                        'rgba(201, 203, 207)'
+                                    ],
+                                data: _chatData
+                                   
+                                }]
+                            }
+                        });
+
+
+
+
+
+                }
+
+            });
+        }
+
+    </script>
+}

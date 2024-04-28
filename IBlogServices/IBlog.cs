@@ -10,5 +10,6 @@ namespace BlogApplication.IBlogServices
         public Blog Edit(int blogId);
         public string Edit(Blog BlogM);
         public bool Delete(int blogId);
+        public List<Dashboard> DashboardList();
     }
 }
