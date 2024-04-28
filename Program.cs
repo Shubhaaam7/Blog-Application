@@ -25,6 +25,10 @@ builder.Services.AddNotyf(config =>
     config.Position = NotyfPosition.TopRight;
 });
 
+//
+builder.Services.AddRazorPages().
+    AddRazorRuntimeCompilation();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -39,7 +43,7 @@ if (!app.Environment.IsDevelopment())
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .MinimumLevel.Error()
-    .WriteTo.File("Logs/BlogApplicationLoggs.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File("Logs/BlogApplicationLoggs.txt", rollingInterval: RollingInterval.Month)
     .CreateLogger();
 
 

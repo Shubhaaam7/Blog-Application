@@ -13,5 +13,6 @@ namespace  BlogApplication.Data
         { }
 
        public  DbSet<Blog> BlogDetails { get; set; }
+        public DbSet<Dashboard> SalesMontlyData { get; set; }
     }
 }

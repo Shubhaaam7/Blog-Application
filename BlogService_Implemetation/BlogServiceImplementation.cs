@@ -179,6 +179,17 @@ namespace BlogApplication.BlogService_Implemetation
             }
             return output;
         }
+
+        public List<Dashboard> DashboardList()
+        {
+            var List = context.SalesMontlyData.
+                OrderByDescending(b => b.Id).
+                AsNoTracking().
+                ToList();
+
+            return List;
+
+        }
         #endregion
     }
 }
