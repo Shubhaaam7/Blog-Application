@@ -20,7 +20,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 //Added for toaster notification
 builder.Services.AddNotyf(config =>
 {
-    config.DurationInSeconds = 10;
+    config.DurationInSeconds = 5;
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 });
