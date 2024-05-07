@@ -3,6 +3,7 @@ using BlogApplication.Data;
 using BlogApplication.IBlogServices;
 using BlogApplication.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace BlogApplication.Controllers
 {
@@ -37,13 +38,24 @@ namespace BlogApplication.Controllers
 
         public List<object> List()
         {
-            List<object> output = new List<object>();
-            var List = _blogService.DashboardList();
-            List<string> labels= _blogService.DashboardList().Select(x => x.MonthName).ToList();
-            List<int> salesnumber = _blogService.DashboardList().Select(x => x.TotalSales).ToList();
 
-            output.Add(labels);
-            output.Add(salesnumber);
+            var data = context.MonthWiseData.FromSqlInterpolated($"MonthWiseData").ToList();
+
+            List<object> output = new List<object>();
+            //var List = _blogService.DashboardList();
+            //_blogService.DashboardList().Select(x => x.MonthName).ToList();
+            //_blogService.DashboardList().Select(x => x.TotalSales).ToList();
+            List<int> salesnumber = new List<int>();
+            List<string> labels = new List<string>();
+
+            foreach (var item in data) 
+            {
+                output.Add(item.MonthName);
+                output.Add(item.MonthCount);
+            }
+
+
+            
             return output;
 
             

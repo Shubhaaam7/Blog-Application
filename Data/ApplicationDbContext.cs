@@ -14,5 +14,7 @@ namespace  BlogApplication.Data
 
        public  DbSet<Blog> BlogDetails { get; set; }
         public DbSet<Dashboard> SalesMontlyData { get; set; }
+
+        public virtual DbSet<MonthWiseDashboard> MonthWiseData { get; set; }
     }
 }

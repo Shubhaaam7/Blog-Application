@@ -5,6 +5,7 @@ namespace BlogApplication.Models
 {
     public class Blog
     {
+        
         public int Id { get; set; }
 
         [Required(ErrorMessage = "Title cannot be blank")]
