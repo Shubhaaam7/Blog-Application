@@ -23,8 +23,7 @@ namespace BlogApplication.Controllers
 
         public BlogsController(ApplicationDbContext _context, 
                                 IBlog blogService,
-                                INotyfService toastr
-            )
+                                INotyfService toastr)
         {
             context = _context;
             _blogService = blogService;
