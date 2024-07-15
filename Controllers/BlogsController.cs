@@ -4,11 +4,14 @@ using BlogApplication.Constants;
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
 using BlogApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics.Metrics;
 
+
 namespace BlogApplication.Controllers
 {
+   [AllowAnonymous]
     public class BlogsController : Controller
     {
         // Created Reference of ApplicationDbContext class
@@ -51,7 +54,7 @@ namespace BlogApplication.Controllers
         {
             if (ModelState.IsValid)
             {
-                var status = _blogService.CreateBlog(BlogModel);
+                var status =  _blogService.CreateBlog(BlogModel);
 
 
                 return RedirectToAction(BlogConstant.LIST);

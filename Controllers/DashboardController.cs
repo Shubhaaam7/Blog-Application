@@ -2,11 +2,13 @@
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
 using BlogApplication.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace BlogApplication.Controllers
 {
+    [Authorize]
     public class DashboardController : Controller
     {
 
@@ -50,12 +52,13 @@ namespace BlogApplication.Controllers
 
             foreach (var item in data) 
             {
-                output.Add(item.MonthName);
-                output.Add(item.MonthCount);
+                labels.Add(item.MonthName);
+                salesnumber.Add(item.MonthCount);
             }
 
 
-            
+            output.Add(labels);
+            output.Add(salesnumber);
             return output;
 
             
