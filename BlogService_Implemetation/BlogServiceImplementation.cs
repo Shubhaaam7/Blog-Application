@@ -94,7 +94,7 @@ namespace BlogApplication.BlogService_Implemetation
             catch(Exception ex)
             {
                 Log.Error("Controller:BlogServiceImplementation  Method:Create" + ex);
-                throw ex;
+                throw ;
             }   
         }
 
@@ -171,8 +171,12 @@ namespace BlogApplication.BlogService_Implemetation
                 var data = context.BlogDetails.Where(u => u.Id == blogId).FirstOrDefault();
                 if (data!=null) 
                 {
+                    //context.Database.ExecuteSqlRaw("DISABLE TRIGGER TriggerName ON BlogDetails");
                     context.BlogDetails.Remove(data);
                     context.SaveChanges();
+                    //context.Database.ExecuteSqlRaw("ENABLE TRIGGER TriggerName ON BlogDetails");
+
+                    //transaction.Commit();
                     output = true;
                     return output;
                 }

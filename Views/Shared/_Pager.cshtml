@@ -1,0 +1,44 @@
+﻿@model BlogApplication.Models.PaginatedList
+
+<div class="row">
+    <div class="container">
+        @if (Model.TotalPages > 0)
+        {
+
+
+
+
+            <ul class="pagination justify-content-end">
+
+                @if (Model.CurrentPage > 1)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Employees" asp-action="List" asp-route-pg="1">First</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Employees" asp-action="List" asp-route-pg="@(Model.CurrentPage-1)">Previous</a>
+                    </li>
+                }
+                @for (var pgr = Model.StartPage; pgr < Model.EndPage; pgr++)
+                {
+                    <li class="page-item @(pgr==Model.CurrentPage ? "active":"")">
+                        <a class="page-link" asp-controller="Employees" asp-action="List" asp-route-pg="@pgr">@pgr</a>
+                    </li>
+                }
+
+                @if (Model.CurrentPage < Model.TotalPages)
+                {
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Employees" asp-action="List" asp-route-pg="@(Model.CurrentPage+1)">Next</a>
+                    </li>
+                    <li class="page-item">
+                        <a class="page-link" asp-controller="Employees" asp-action="List" asp-route-pg="@Model.TotalPages">Last</a>
+                    </li>
+                }
+
+            </ul>
+        }
+
+    </div>
+
+</div>

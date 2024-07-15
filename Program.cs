@@ -1,8 +1,10 @@
 using AspNetCoreHero.ToastNotification;
+using AspNetCoreHero.ToastNotification.Notyf.Models;
 using BlogApplication.BlogService_Implemetation;
 using BlogApplication.Data;
 using BlogApplication.IBlogServices;
-
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 
@@ -11,7 +13,11 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 
+//add services for controllers and 
+// add AuthorizeAttribute to all controllers and actions
+//builder.Services.AddControllers(x => x.Filters.Add<AuthorizeAttribute>());
 builder.Services.AddScoped<IBlog,BlogServiceImplementation>();// Added Dependency Injection
+builder.Services.AddScoped<IEmployee, IEmployeeImplemetation>();// Added Dependency Injection
 
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer
 (builder.Configuration.GetConnectionString("Blogs")));  //Injecting database connectionvity
@@ -24,6 +30,7 @@ builder.Services.AddNotyf(config =>
     config.IsDismissable = true;
     config.Position = NotyfPosition.TopRight;
 });
+
 
 //
 builder.Services.AddRazorPages().
@@ -54,6 +61,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+//app.MapControllers().RequireAuthorization();
+
 
 app.MapControllerRoute(
     name: "default",
