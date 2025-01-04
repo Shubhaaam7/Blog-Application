@@ -1,0 +1,9 @@
+﻿@BlogApplication_HostAddress = https://localhost:7094
+
+GET {{BlogApplication_HostAddress}}/blogs/create/{id}
+
+###
+
+GET {{BlogApplication_HostAddress}}/blogs/list/{id}
+
+###

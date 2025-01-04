@@ -14,8 +14,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 
 //add services for controllers and 
-// add AuthorizeAttribute to all controllers and actions
-//builder.Services.AddControllers(x => x.Filters.Add<AuthorizeAttribute>());
+
 builder.Services.AddScoped<IBlog,BlogServiceImplementation>();// Added Dependency Injection
 builder.Services.AddScoped<IEmployee, IEmployeeImplemetation>();// Added Dependency Injection
 
@@ -32,7 +31,6 @@ builder.Services.AddNotyf(config =>
 });
 
 
-//
 builder.Services.AddRazorPages().
     AddRazorRuntimeCompilation();
 
@@ -61,7 +59,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
-//app.MapControllers().RequireAuthorization();
+
 
 
 app.MapControllerRoute(
@@ -72,4 +70,5 @@ app.MapAreaControllerRoute(
     areaName: "Blogs",
     pattern: "{controller=Blogs}/{action=Edit}/{id?}"
     );
+
 app.Run();

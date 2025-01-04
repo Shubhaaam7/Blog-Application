@@ -10,12 +10,11 @@ namespace BlogApplication.Controllers
     public class EmployeesController : Controller
     {
 
-        private readonly ApplicationDbContext _context;
+        
         private readonly IEmployee _employee;
 
-        public EmployeesController(ApplicationDbContext context, IEmployee employee)
+        public EmployeesController(IEmployee employee)
         {
-            _context = context;
             _employee = employee;
         }
 

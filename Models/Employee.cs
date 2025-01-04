@@ -12,5 +12,8 @@
 
         public string Team { get; set; } = string.Empty;
 
+        public int AddressId { get; set; }
+        public Address Address { get; set; }  // Navigation property
+
     }
 }

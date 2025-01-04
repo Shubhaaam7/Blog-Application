@@ -16,6 +16,13 @@ namespace BlogApplication.BlogService_Implemetation
 
         public List<Employee> EmployeeList()
         {
+
+            var datawithAddress = context.Employee.
+                Include(e=>e.Address)
+                .AsNoTracking()
+                .ToList();
+
+
             var empList=context.Employee.AsNoTracking().ToList();
          
 
